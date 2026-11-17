@@ -5,10 +5,8 @@
   "description": "Coy Discover Backend",
   "main": "index.cjs",
   "scripts": {
-  "start": "node dev-server.mjs",
-  "lint": "eslint ."
-
-  },
+  "start": "node index.cjs"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
