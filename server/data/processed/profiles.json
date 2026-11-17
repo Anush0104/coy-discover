@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "name": "Aarav",
+    "age": 22,
+    "city": "Bangalore",
+    "bio": "Coffee lover and weekend explorer.",
+    "interests": [
+      "Travel",
+      "Music",
+      "Photography"
+    ],
+    "photo": 12,
+    "likedByUser": true
+  },
+  {
+    "id": 2,
+    "name": "Rohan",
+    "age": 35,
+    "city": "Delhi",
+    "bio": "Music, movies and meaningful conversations.",
+    "interests": [
+      "Coding",
+      "Gaming",
+      "Movies"
+    ],
+    "photo": 13,
+    "likedByUser": false
+  },
+  {
+    "id": 3,
+    "name": "Kabir",
+    "age": 23,
+    "city": "Mumbai",
+    "bio": "Always ready for a new adventure.",
+    "interests": [
+      "Fitness",
+      "Food",
+      "Travel"
+    ],
+    "photo": 14,
+    "likedByUser": false
+  },
+  {
+    "id": 4,
+    "name": "Vihaan",
+    "age": 29,
+    "city": "Pune",
+    "bio": "Foodie who loves discovering new places.",
+    "interests": [
+      "Books",
+      "Art",
+      "Coffee"
+    ],
+    "photo": 15,
+    "likedByUser": true
+  },
+  {
+    "id": 5,
+    "name": "Aditya",
+    "age": 29,
+    "city": "Hyderabad",
+    "bio": "Tech enthusiast and photography lover.",
+    "interests": [
+      "Music",
+      "Nature",
+      "Movies"
+    ],
+    "photo": 16,
+    "likedByUser": false
+  },
+  {
+    "id": 6,
+    "name": "Ishaan",
+    "age": 32,
+    "city": "Jaipur",
+    "bio": "Enjoying life one journey at a time.",
+    "interests": [
+      "Cricket",
+      "Travel",
+      "Photography"
+    ],
+    "photo": 17,
+    "likedByUser": false
+  },
+  {
+    "id": 7,
+    "name": "Arjun",
+    "age": 31,
+    "city": "Lucknow",
+    "bio": "Bookworm with a soft spot for coffee.",
+    "interests": [
+      "Cooking",
+      "Fitness",
+      "Food"
+    ],
+    "photo": 18,
+    "likedByUser": true
+  },
+  {
+    "id": 8,
+    "name": "Reyansh",
+    "age": 24,
+    "city": "Chennai",
+    "bio": "Sports fan and spontaneous traveller.",
+    "interests": [
+      "Technology",
+      "Books",
+      "Music"
+    ],
+    "photo": 19,
+    "likedByUser": false
+  },
+  {
+    "id": 9,
+    "name": "Dev",
+    "age": 37,
+    "city": "Kolkata",
+    "bio": "Nature lover who enjoys peaceful evenings.",
+    "interests": [
+      "Travel",
+      "Music",
+      "Photography"
+    ],
+    "photo": 20,
+    "likedByUser": false
+  },
+  {
+    "id": 10,
+    "name": "Karan",
+    "age": 24,
+    "city": "Kanpur",
+    "bio": "Looking for good conversations and new experiences.",
+    "interests": [
+      "Coding",
+      "Gaming",
+      "Movies"
+    ],
+    "photo": 21,
+    "likedByUser": true
+  },
+  {
+    "id": 11,
+    "name": "Siddharth",
+    "age": 30,
+    "city": "Noida",
+    "bio": "Coffee lover and weekend explorer.",
+    "interests": [
+      "Fitness",
+      "Food",
+      "Travel"
+    ],
+    "photo": 22,
+    "likedByUser": false
+  },
+  {
+    "id": 12,
+    "name": "Ayaan",
+    "age": 29,
+    "city": "Gurgaon",
+    "bio": "Music, movies and meaningful conversations.",
+    "interests": [
+      "Books",
+      "Art",
+      "Coffee"
+    ],
+    "photo": 23,
+    "likedByUser": false
+  },
+  {
+    "id": 13,
+    "name": "Dhruv",
+    "age": 39,
+    "city": "Bhopal",
+    "bio": "Always ready for a new adventure.",
+    "interests": [
+      "Music",
+      "Nature",
+      "Movies"
+    ],
+    "photo": 24,
+    "likedByUser": true
+  },
+  {
+    "id": 14,
+    "name": "Ritvik",
+    "age": 33,
+    "city": "Indore",
+    "bio": "Foodie who loves discovering new places.",
+    "interests": [
+      "Cricket",
+      "Travel",
+      "Photography"
+    ],
+    "photo": 25,
+    "likedByUser": false
+  },
+  {
+    "id": 15,
+    "name": "Manav",
+    "age": 26,
+    "city": "Dehradun",
+    "bio": "Tech enthusiast and photography lover.",
+    "interests": [
+      "Cooking",
+      "Fitness",
+      "Food"
+    ],
+    "photo": 26,
+    "likedByUser": false
+  },
+  {
+    "id": 16,
+    "name": "Yash",
+    "age": 31,
+    "city": "Bangalore",
+    "bio": "Enjoying life one journey at a time.",
+    "interests": [
+      "Technology",
+      "Books",
+      "Music"
+    ],
+    "photo": 27,
+    "likedByUser": true
+  },
+  {
+    "id": 17,
+    "name": "Rudra",
+    "age": 33,
+    "city": "Delhi",
+    "bio": "Bookworm with a soft spot for coffee.",
+    "interests": [
+      "Travel",
+      "Music",
+      "Photography"
+    ],
+    "photo": 28,
+    "likedByUser": false
+  },
+  {
+    "id": 18,
+    "name": "Atharv",
+    "age": 27,
+    "city": "Mumbai",
+    "bio": "Sports fan and spontaneous traveller.",
+    "interests": [
+      "Coding",
+      "Gaming",
+      "Movies"
+    ],
+    "photo": 29,
+    "likedByUser": false
+  },
+  {
+    "id": 19,
+    "name": "Neil",
+    "age": 22,
+    "city": "Pune",
+    "bio": "Nature lover who enjoys peaceful evenings.",
+    "interests": [
+      "Fitness",
+      "Food",
+      "Travel"
+    ],
+    "photo": 30,
+    "likedByUser": true
+  },
+  {
+    "id": 20,
+    "name": "Samarth",
+    "age": 30,
+    "city": "Hyderabad",
+    "bio": "Looking for good conversations and new experiences.",
+    "interests": [
+      "Books",
+      "Art",
+      "Coffee"
+    ],
+    "photo": 31,
+    "likedByUser": false
+  },
+  {
+    "id": 21,
+    "name": "Parth",
+    "age": 30,
+    "city": "Jaipur",
+    "bio": "Coffee lover and weekend explorer.",
+    "interests": [
+      "Music",
+      "Nature",
+      "Movies"
+    ],
+    "photo": 32,
+    "likedByUser": false
+  },
+  {
+    "id": 22,
+    "name": "Vivaan",
+    "age": 33,
+    "city": "Lucknow",
+    "bio": "Music, movies and meaningful conversations.",
+    "interests": [
+      "Cricket",
+      "Travel",
+      "Photography"
+    ],
+    "photo": 33,
+    "likedByUser": true
+  },
+  {
+    "id": 23,
+    "name": "Om",
+    "age": 28,
+    "city": "Chennai",
+    "bio": "Always ready for a new adventure.",
+    "interests": [
+      "Cooking",
+      "Fitness",
+      "Food"
+    ],
+    "photo": 34,
+    "likedByUser": false
+  },
+  {
+    "id": 24,
+    "name": "Shaurya",
+    "age": 22,
+    "city": "Kolkata",
+    "bio": "Foodie who loves discovering new places.",
+    "interests": [
+      "Technology",
+      "Books",
+      "Music"
+    ],
+    "photo": 35,
+    "likedByUser": false
+  },
+  {
+    "id": 25,
+    "name": "Aryan",
+    "age": 22,
+    "city": "Kanpur",
+    "bio": "Tech enthusiast and photography lover.",
+    "interests": [
+      "Travel",
+      "Music",
+      "Photography"
+    ],
+    "photo": 36,
+    "likedByUser": true
+  },
+  {
+    "id": 26,
+    "name": "Aarush",
+    "age": 30,
+    "city": "Noida",
+    "bio": "Enjoying life one journey at a time.",
+    "interests": [
+      "Coding",
+      "Gaming",
+      "Movies"
+    ],
+    "photo": 37,
+    "likedByUser": false
+  },
+  {
+    "id": 27,
+    "name": "Krish",
+    "age": 32,
+    "city": "Gurgaon",
+    "bio": "Bookworm with a soft spot for coffee.",
+    "interests": [
+      "Fitness",
+      "Food",
+      "Travel"
+    ],
+    "photo": 38,
+    "likedByUser": false
+  },
+  {
+    "id": 28,
+    "name": "Advait",
+    "age": 27,
+    "city": "Bhopal",
+    "bio": "Sports fan and spontaneous traveller.",
+    "interests": [
+      "Books",
+      "Art",
+      "Coffee"
+    ],
+    "photo": 39,
+    "likedByUser": true
+  },
+  {
+    "id": 29,
+    "name": "Raghav",
+    "age": 27,
+    "city": "Indore",
+    "bio": "Nature lover who enjoys peaceful evenings.",
+    "interests": [
+      "Music",
+      "Nature",
+      "Movies"
+    ],
+    "photo": 40,
+    "likedByUser": false
+  },
+  {
+    "id": 30,
+    "name": "Anay",
+    "age": 38,
+    "city": "Dehradun",
+    "bio": "Looking for good conversations and new experiences.",
+    "interests": [
+      "Cricket",
+      "Travel",
+      "Photography"
+    ],
+    "photo": 41,
+    "likedByUser": false
+  }
+]

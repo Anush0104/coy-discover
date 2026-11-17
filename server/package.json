@@ -1,0 +1,22 @@
+
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Coy Discover Backend",
+  "main": "index.cjs",
+  "scripts": {
+  "start": "node dev-server.mjs",
+  "lint": "eslint ."
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
