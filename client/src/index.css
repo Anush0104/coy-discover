@@ -325,6 +325,18 @@ button {
   margin-top: 25px;
 }
 
+.empty-state {
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-section {
+  max-width: 410px;
+  margin: 0 auto;
+}
+
 .empty-heart,
 .home-icon {
   width: 72px;
@@ -374,6 +386,7 @@ button {
 
 .match-list {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -675,6 +688,10 @@ img {
   .match-item {
     gap: 11px;
     padding: 11px;
+  }
+
+  .match-list {
+    grid-template-columns: 1fr;
   }
 }
 

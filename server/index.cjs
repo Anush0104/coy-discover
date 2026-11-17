@@ -4,7 +4,8 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+// Port 5000 is occupied by macOS Control Center on some development machines.
+const PORT = process.env.PORT || 5001;
 app.use(express.json());
 
 // Allow our React frontend to communicate with this backend.
@@ -18,6 +19,11 @@ app.use((req, res, next) => {
   }
 
   next();
+});
+
+// Lightweight readiness check for the web client and local monitoring.
+app.get("/health", (req, res) => {
+  res.json({ success: true, status: "ok" });
 });
 
 const profilesPath = path.join(

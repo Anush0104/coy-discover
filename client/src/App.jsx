@@ -9,11 +9,15 @@ import {
   AnimatePresence,
   useMotionValue,
   useTransform
-} from "framer-motion"; import "./index.css";
+} from "framer-motion";
 
 const API_URL =
   import.meta.env.VITE_API_URL ||
-  `${window.location.protocol}//${window.location.hostname}:5000`;const cardVariants = {
+  `${window.location.protocol}//${window.location.hostname}:5001`;
+
+const API_BASE = API_URL.replace(/\/$/, "");
+
+const cardVariants = {
   initial: {
     opacity: 0,
     y: 25,
@@ -46,6 +50,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [apiStatus, setApiStatus] = useState("checking");
   const [exitDirection, setExitDirection] = useState("like");
 
   const currentProfile = profiles[0];
@@ -71,9 +76,47 @@ export default function App() {
     [1, 0]
   );
 
+  async function apiRequest(path, options) {
+    try {
+      const response = await fetch(`${API_BASE}${path}`, {
+        ...options,
+        signal: AbortSignal.timeout(10000)
+      });
+      setApiStatus("online");
+      return response;
+    } catch {
+      setApiStatus("offline");
+      throw new Error(`Can't reach the API at ${API_BASE}. Make sure the backend is running and try again.`);
+    }
+  }
+
+  useEffect(() => {
+    let active = true;
+
+    async function checkApi() {
+      try {
+        const response = await fetch(`${API_BASE}/health`, {
+          signal: AbortSignal.timeout(5000)
+        });
+        if (!response.ok) throw new Error("API health check failed");
+        if (active) setApiStatus("online");
+      } catch {
+        if (active) setApiStatus("offline");
+      }
+    }
+
+    checkApi();
+    const interval = window.setInterval(checkApi, 30000);
+
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+    };
+  }, []);
+
   // Load profiles from backend.
   async function loadFeed() {
-    const response = await fetch(`${API_URL}/feed`);
+    const response = await apiRequest("/feed");
 
     if (!response.ok) {
       throw new Error("Unable to load profiles.");
@@ -85,7 +128,7 @@ export default function App() {
 
   // Load mutual matches from backend.
   async function loadMatches() {
-    const response = await fetch(`${API_URL}/matches`);
+    const response = await apiRequest("/matches");
 
     if (!response.ok) {
       throw new Error("Unable to load matches.");
@@ -137,7 +180,7 @@ export default function App() {
     dragX.set(0);
 
     try {
-      const response = await fetch(`${API_URL}/swipe`, {
+      const response = await apiRequest("/swipe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -199,7 +242,6 @@ export default function App() {
     }
   }
 
-  // Refresh feed and matches.
   async function refreshData() {
     await loadData();
     setFeedback("");
@@ -209,9 +251,7 @@ export default function App() {
   return (
     <div className="app-shell">
 
-      {/* Header */}
-      {/* Header - visible only on Discover */}
-      {activeTab === "discover" && (
+      {/* Keep the shell in place as users move between tabs. */}
         <header className="topbar">
           <div className="brand">
             <span className="brand-icon">♥</span>
@@ -230,13 +270,10 @@ export default function App() {
             <RotateCcw size={18} />
           </button>
         </header>
-      )}
 
       <main className="main-content">
 
         {/* Welcome section */}
-        {/* Welcome section - visible only on Discover */}
-        {activeTab === "discover" && (
           <section className="welcome">
             <div>
               <p className="eyebrow">YOUR NEXT CONNECTION</p>
@@ -260,21 +297,26 @@ export default function App() {
               <Sparkles size={23} />
             </motion.div>
           </section>
-        )}
 
         {/* Navigation */}
         <nav className="tabs">
 
           <button
             className={activeTab === "home" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("home")}
+            onClick={() => {
+              setActiveTab("home");
+              setMatchProfile(null);
+            }}
           >
             <Home size={17} /> Home
           </button>
 
           <button
             className={activeTab === "discover" ? "tab active" : "tab"}
-            onClick={() => setActiveTab("discover")}
+            onClick={() => {
+              setActiveTab("discover");
+              setMatchProfile(null);
+            }}
           >
             <Compass size={17} /> Discover
           </button>
@@ -283,6 +325,7 @@ export default function App() {
             className={activeTab === "matches" ? "tab active" : "tab"}
             onClick={() => {
               setActiveTab("matches");
+              setMatchProfile(null);
               loadMatches().catch(err => setError(err.message));
             }}
           >
@@ -303,8 +346,11 @@ export default function App() {
           </div>
         )}
 
-        {/* Home - intentionally blank */}
-        {activeTab === "home" && null}
+        {activeTab === "home" && (
+          <section className="discover-section home-section">
+            
+          </section>
+        )}
 
 
         {/* Discover */}
@@ -317,7 +363,7 @@ export default function App() {
             </div>
 
             {loading ? (
-              <div className="empty-state">
+              <div className="empty-state feed-unavailable">
                 <h2>Loading profiles...</h2>
                 <p>Please wait while we find your connections.</p>
               </div>
@@ -541,8 +587,8 @@ export default function App() {
                   >
 
                     <img
-                      src={`https://randomuser.me/api/portraits/men/${currentProfile.photo}.jpg`}
-                      alt={currentProfile.name}
+                      src={`https://randomuser.me/api/portraits/men/${profile.photo}.jpg`}
+                      alt={profile.name}
                       draggable="false"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
@@ -601,8 +647,8 @@ export default function App() {
               <h1>It's a <span>match!</span></h1>
 
               <img
-                src={`https://randomuser.me/api/portraits/men/${currentProfile.photo}.jpg`}
-                alt={currentProfile.name}
+                src={`https://randomuser.me/api/portraits/men/${matchProfile.photo}.jpg`}
+                alt={matchProfile.name}
                 draggable="false"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
