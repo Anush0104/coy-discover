@@ -55,7 +55,6 @@ export default function App() {
 
   const currentProfile = profiles[0];
   const swipeLock = useRef(false);
-  // Values used for swipe rotation and feedback stamps.
   const dragX = useMotionValue(0);
 
   const rotate = useTransform(
@@ -114,7 +113,6 @@ export default function App() {
     };
   }, []);
 
-  // Load profiles from backend.
   async function loadFeed() {
     const response = await apiRequest("/feed");
 
@@ -126,7 +124,6 @@ export default function App() {
     setProfiles(data.profiles);
   }
 
-  // Load mutual matches from backend.
   async function loadMatches() {
     const response = await apiRequest("/matches");
 
@@ -140,7 +137,6 @@ export default function App() {
     return data.matches;
   }
 
-  // Load initial application data.
   async function loadData() {
     try {
       setLoading(true);
@@ -161,7 +157,6 @@ export default function App() {
     loadData();
   }, []);
 
-  // Save Like or Pass in backend.
   async function swipe(direction) {
     const profileToSwipe = currentProfile;
 
@@ -173,7 +168,6 @@ export default function App() {
     setError("");
     setExitDirection(direction);
 
-    // Remove the card immediately to trigger its exit animation.
     setProfiles(prev =>
       prev.filter(profile => profile.id !== profileToSwipe.id)
     );
@@ -193,7 +187,6 @@ export default function App() {
 
       const data = await response.json();
 
-      // If this profile was already swiped, refresh the feed.
       if (response.status === 409) {
         try {
           await loadFeed();
@@ -226,7 +219,6 @@ export default function App() {
       }
 
     } catch (err) {
-      // Restore the profile if the swipe could not be saved.
       setProfiles(prev =>
         prev.some(profile => profile.id === profileToSwipe.id)
           ? prev
@@ -252,51 +244,50 @@ export default function App() {
     <div className="app-shell">
 
       {/* Keep the shell in place as users move between tabs. */}
-        <header className="topbar">
-          <div className="brand">
-            <span className="brand-icon">♥</span>
-            <span>coy<span className="brand-dot">.</span></span>
-          </div>
+      <header className="topbar">
+        <div className="brand">
+          <span className="brand-icon">♥</span>
+          <span>coy<span className="brand-dot">.</span></span>
+        </div>
 
-          <span className="header-caption">
-            A little closer, a little bolder.
-          </span>
+        <span className="header-caption">
+          A little closer, a little bolder.
+        </span>
 
-          <button
-            className="reset-button"
-            onClick={refreshData}
-            title="Refresh profiles"
-          >
-            <RotateCcw size={18} />
-          </button>
-        </header>
+        <button
+          className="reset-button"
+          onClick={refreshData}
+          title="Refresh profiles"
+        >
+          <RotateCcw size={18} />
+        </button>
+      </header>
 
       <main className="main-content">
 
         {/* Welcome section */}
-          <section className="welcome">
-            <div>
-              <p className="eyebrow">YOUR NEXT CONNECTION</p>
-              <h1>
-                Discover <span>someone new.</span>
-              </h1>
-              <p className="subtitle">
-                Good connections start with a little curiosity.
-              </p>
-            </div>
+        <section className="welcome">
+          <div>
+            <p className="eyebrow">TODAY'S PICKS</p>
+            <h1>
+              Discover <span>someone new.</span>
+            </h1>
+            <p className="subtitle">
+              Swipe right on people you vibe with, and pass on the rest.              </p>
+          </div>
 
-            <motion.div
-              className="sparkle"
-              animate={{ rotate: [0, 12, -12, 0] }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Sparkles size={23} />
-            </motion.div>
-          </section>
+          <motion.div
+            className="sparkle"
+            animate={{ rotate: [0, 12, -12, 0] }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <Sparkles size={23} />
+          </motion.div>
+        </section>
 
         {/* Navigation */}
         <nav className="tabs">
@@ -348,7 +339,7 @@ export default function App() {
 
         {activeTab === "home" && (
           <section className="discover-section home-section">
-            
+
           </section>
         )}
 

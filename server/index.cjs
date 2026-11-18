@@ -1,4 +1,3 @@
-
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -21,7 +20,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Lightweight readiness check for the web client and local monitoring.
 app.get("/health", (req, res) => {
   res.json({ success: true, status: "ok" });
 });
@@ -38,8 +36,11 @@ const profiles = JSON.parse(
   fs.readFileSync(profilesPath, "utf8")
 );
 
-// Keep private incoming likes on the server.
-// These are synthetic demo likes generated earlier.
+const incomingLikes = profiles
+  .filter(profile => profile.likedByUser === true)
+  .map(profile => profile.id);
+
+
 let state;
 
 if (fs.existsSync(statePath)) {
@@ -47,15 +48,22 @@ if (fs.existsSync(statePath)) {
 } else {
   state = {
     swipes: {},
-    incomingLikes: profiles
-      .filter(profile => profile.likedByUser === true)
-      .map(profile => profile.id)
+    matches: [],
+    incomingLikes
   };
 
   fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
 }
 
-// Never send private incoming-like information to the frontend.
+state.swipes ||= {};
+state.incomingLikes = incomingLikes;
+state.matches ||= profiles
+  .filter(profile =>
+    state.swipes[profile.id] === "like" &&
+    state.incomingLikes.includes(profile.id)
+  )
+  .map(profile => profile.id);
+
 function publicProfile(profile) {
   const { likedByUser, ...safeProfile } = profile;
   return safeProfile;
@@ -65,7 +73,6 @@ function saveState() {
   fs.writeFileSync(statePath, JSON.stringify(state, null, 2));
 }
 
-// 1. Get profiles that the user has not swiped yet.
 app.get("/feed", (req, res) => {
   const feed = profiles.filter(profile =>
     !state.swipes[profile.id]
@@ -77,7 +84,16 @@ app.get("/feed", (req, res) => {
   });
 });
 
-// 2. Save a Like or Pass.
+app.post("/reset", (req, res) => {
+  state.swipes = {};
+  saveState();
+
+  res.json({
+    success: true,
+    message: "Profiles are ready to swipe again."
+  });
+});
+
 app.post("/swipe", (req, res) => {
   const { profileId, action } = req.body;
 
@@ -105,12 +121,17 @@ app.post("/swipe", (req, res) => {
     });
   }
 
-  state.swipes[profileId] = action;
-  saveState();
-
   const isMatch =
     action === "like" &&
     state.incomingLikes.includes(profileId);
+
+  state.swipes[profileId] = action;
+
+  if (isMatch && !state.matches.includes(profileId)) {
+    state.matches.push(profileId);
+  }
+
+  saveState();
 
   res.json({
     success: true,
@@ -122,12 +143,8 @@ app.post("/swipe", (req, res) => {
   });
 });
 
-// 3. Get only mutual matches.
 app.get("/matches", (req, res) => {
-  const matches = profiles.filter(profile =>
-    state.swipes[profile.id] === "like" &&
-    state.incomingLikes.includes(profile.id)
-  );
+  const matches = profiles.filter(profile => state.matches.includes(profile.id));
 
   res.json({
     success: true,
@@ -136,8 +153,8 @@ app.get("/matches", (req, res) => {
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log("--------------------------------");
+  
   console.log("Coy Discover Backend is running!");
   console.log(`http://localhost:${PORT}`);
-  console.log("--------------------------------");
+  
 });
