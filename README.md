@@ -287,3 +287,11 @@ For a guaranteed reset, clear the backend state file using the deployed service'
 
 JSON file storage is suitable for this demonstration, but a production application should use a database and separate state for each authenticated user.
 
+## 📌 Future Improvements
+
+- **Progressive Web App (PWA):** Add a web app manifest and a service worker so Coy Discover can be installed on a phone's home screen and feel like a native app, while still working as a normal website in the browser. One codebase would serve both web and mobile, with faster loading and basic offline support.
+- User accounts and authentication
+- Database storage
+- Messaging between matches
+- Profile editing and discovery filters
+- Location-based recommendations
